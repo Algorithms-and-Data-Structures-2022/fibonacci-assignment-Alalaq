@@ -84,9 +84,12 @@ namespace assignment {
       return n;
     }
 
+    Matrix2x2 P = {{{0, 1}, {1, 1}}};
+    P = matrix_power(P, n-1);
+
     // Tip: используйте реализованную функцию matrix_pow
 
-    return 0;
+    return P[0][0] + P[1][0];
   }
 
 }  // namespace assignment
