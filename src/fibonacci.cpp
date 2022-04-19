@@ -11,9 +11,16 @@ namespace assignment {
       return n;
     }
 
-    // Напишите здесь свой код ...
+    double phi = (1 + sqrt(5)) / 2;
+    double minus_phi = (1 - sqrt(5)) / 2;
 
-    return 0;
+    double m = ((pow(phi, n) - pow(minus_phi, n))/ sqrt(5));
+
+    if (static_cast<int>(m) == fib_iterative(n)){
+      return static_cast<int>(m);
+    }
+
+    return static_cast<int>(m) + 1;
   }
 
   int64_t fib_iterative(int n) {
@@ -22,20 +29,34 @@ namespace assignment {
       return n;
     }
 
-    // буфер для хранения двух последних значения ряда Фибоначчи
-    int64_t fib_prev = 0;
-    int64_t fib_curr = 1;
+    int fib[n - 1];
 
-    // Напишите здесь свой код ...
+    fib[0] = 0;
+    fib[1] = 1;
 
-    return 0;
+    for (int i = 2; i < n; i++){
+      fib[i] = fib[i - 1] + fib[i - 2];
+    }
+
+    int sumfib = 0;
+
+    for (int elem : fib){
+      sumfib += elem;
+    }
+
+    return sumfib + 1;
   }
 
   int64_t fib_recursive(int n) {
+    if (n == 0){
+      return 0;
+    }
 
-    // Напишите здесь свой код ...
+    else if (n == 1){
+      return 1;
+    }
 
-    return 0;
+    else return fib_recursive(n - 1) + fib_recursive(n - 2);
   }
 
   int64_t fib_recursive_memoization(int n, std::vector<int64_t>& cache) {
@@ -46,10 +67,13 @@ namespace assignment {
 
     if (cache[n] != -1) {
       // Напишите здесь свой код ...
-      return 0;
+      return cache[n];
     }
 
-    // Напишите здесь свой код ...
+    else{
+      cache[n] = fib_recursive_memoization(n - 1, cache) + fib_recursive_memoization(n - 2, cache);
+      return fib_recursive_memoization(n - 1, cache) + fib_recursive_memoization(n - 2, cache);
+    }
 
     return 0;
   }
@@ -60,11 +84,12 @@ namespace assignment {
       return n;
     }
 
-    // Напишите здесь свой код ...
+    Matrix2x2 P = {{{0, 1}, {1, 1}}};
+    P = matrix_power(P, n-1);
 
     // Tip: используйте реализованную функцию matrix_pow
 
-    return 0;
+    return P[0][0] + P[1][0];
   }
 
 }  // namespace assignment
